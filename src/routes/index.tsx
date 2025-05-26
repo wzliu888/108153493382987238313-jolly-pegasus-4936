@@ -22,6 +22,14 @@ function Clock() {
       <div className="text-2xl font-mono bg-black/20 px-4 py-2 rounded-lg">
         {time.toLocaleTimeString()}
       </div>
+      <div className="text-sm text-white/70 mt-2 font-light">
+        {time.toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+      </div>
     </div>
   )
 }
