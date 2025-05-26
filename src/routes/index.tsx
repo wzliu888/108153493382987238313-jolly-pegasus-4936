@@ -1,9 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useState, useEffect } from 'react'
 import logo from '../logo.svg'
 
 export const Route = createFileRoute('/')({
   component: App,
 })
+
+function Clock() {
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date())
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="mb-8">
+      <div className="text-2xl font-mono bg-black/20 px-4 py-2 rounded-lg">
+        {time.toLocaleTimeString()}
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -14,8 +35,9 @@ function App() {
           className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
           alt="logo"
         />
+        <Clock />
         <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
+          Welcome! The current time is displayed above.
         </p>
         <a
           className="text-[#61dafb] hover:underline"
